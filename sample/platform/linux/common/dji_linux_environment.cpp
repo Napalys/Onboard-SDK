@@ -179,11 +179,11 @@ DJI_Environment::parse(std::string config_file_path)
     {
       std::cout << "There's an error with your UserConfig.txt file.\n";
       std::cout << "Recommended format of UserConfig.txt :\n"
-                   "app_id : 123456\n"
-                   "app_key : 0123456789abcdefghijklmnopqrstuvwxyz\n"
-                   "device : /dev/ttyUSBx\n"
-                   "baudrate : 921600\n"
-                   "acm_port : /dev/ttyACMx\n\n";
+                   "app_id : 1090003\n"
+                   "app_key : 29fc8da2885d0b6fbe487adfe862cfc42507521c7ce5e72bc40f4ad53503d163\n"
+                   "device : /dev/ttyTHS2\n"
+                   "baudrate : 1000000\n"
+                   "acm_port : /dev/ttyACM0\n\n";
       result = false;
 
     }
@@ -205,13 +205,14 @@ DJI_Environment::parse(std::string config_file_path)
 
     read.close();
   }
-  else
-  {
-    std::cout << "User config file could not be opened. Make sure your "
-                 "filepath is correct\n"
-              << "and have sufficient permissions." << std::endl;
-    result = false;
+  else {
+    this->app_id = 1090003;
+    std::cout << "File not found, defoult values are used.\n";
+    this->enc_key = std::string("29fc8da2885d0b6fbe487adfe862cfc42507521c7ce5e72bc40f4ad53503d163");
+    this->device = std::string("/dev/ttyTHS2");
+    this->baudrate = 1000000;
+    this->device_acm = std::string("/dev/ttyACM0");
+    result = true;
   }
-
   return result;
 }
